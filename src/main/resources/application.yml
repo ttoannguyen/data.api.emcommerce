@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: dataemcommerceapi
+  datasource:
+    url: jdbc:postgresql://${PGHOST}:5432/${PGDATABASE}?sslmode=require&ssl=true&channelBinding=require
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  devtools:
+    restart:
+      enabled: false
+
+server:
+  port: 8080
