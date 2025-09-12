@@ -1,6 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS ecommerce;
 
--- Bảng địa lý
 CREATE TABLE IF NOT EXISTS ecommerce.geolocations (
     geolocation_zip_code_prefix VARCHAR,
     geolocation_lat NUMERIC,
@@ -14,7 +13,6 @@ CREATE TABLE IF NOT EXISTS ecommerce.geolocations (
     )
 );
 
--- Bảng khách hàng (không FK)
 CREATE TABLE IF NOT EXISTS ecommerce.customers (
     customer_id VARCHAR PRIMARY KEY,
     customer_unique_id VARCHAR,
@@ -23,7 +21,6 @@ CREATE TABLE IF NOT EXISTS ecommerce.customers (
     customer_state VARCHAR
 );
 
--- Bảng người bán (không FK)
 CREATE TABLE IF NOT EXISTS ecommerce.sellers (
     seller_id VARCHAR PRIMARY KEY,
     seller_zip_code_prefix VARCHAR,
@@ -31,7 +28,6 @@ CREATE TABLE IF NOT EXISTS ecommerce.sellers (
     seller_state VARCHAR
 );
 
--- Bảng sản phẩm
 CREATE TABLE IF NOT EXISTS ecommerce.products (
     product_id VARCHAR PRIMARY KEY,
     product_category_name VARCHAR,
@@ -44,13 +40,11 @@ CREATE TABLE IF NOT EXISTS ecommerce.products (
     product_width_cm INT
 );
 
--- Bảng dịch tên category
 CREATE TABLE IF NOT EXISTS ecommerce.product_category_translation (
     product_category_name VARCHAR PRIMARY KEY,
     product_category_name_english VARCHAR
 );
 
--- Bảng đơn hàng
 CREATE TABLE IF NOT EXISTS ecommerce.orders (
     order_id VARCHAR PRIMARY KEY,
     customer_id VARCHAR REFERENCES ecommerce.customers (customer_id),
@@ -62,7 +56,6 @@ CREATE TABLE IF NOT EXISTS ecommerce.orders (
     order_estimated_delivery_date TIMESTAMP
 );
 
--- Bảng chi tiết đơn hàng
 CREATE TABLE IF NOT EXISTS ecommerce.order_items (
     order_id VARCHAR REFERENCES ecommerce.orders (order_id),
     order_item_id INT,
@@ -74,7 +67,6 @@ CREATE TABLE IF NOT EXISTS ecommerce.order_items (
     PRIMARY KEY (order_id, order_item_id)
 );
 
--- Bảng thanh toán
 CREATE TABLE IF NOT EXISTS ecommerce.payments (
     order_id VARCHAR REFERENCES ecommerce.orders (order_id),
     payment_sequential INT,
@@ -84,7 +76,6 @@ CREATE TABLE IF NOT EXISTS ecommerce.payments (
     PRIMARY KEY (order_id, payment_sequential)
 );
 
--- Bảng review
 CREATE TABLE IF NOT EXISTS ecommerce.reviews (
     review_id VARCHAR,
     order_id VARCHAR REFERENCES ecommerce.orders (order_id),
