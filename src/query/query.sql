@@ -114,11 +114,11 @@ GROUP BY
     month
 ORDER BY month;
 
-SELECT pct.product_category_name_english AS product_name, COUNT(oi.product_id) AS total_sold
+SELECT p.product_id, p.product_category_name, COUNT(oi.product_id) AS total_sold
 FROM ecommerce.order_items oi
     JOIN ecommerce.products p ON oi.product_id = p.product_id
-    JOIN ecommerce.product_category_translation pct ON p.product_category_name = pct.product_category_name
 GROUP BY
-    pct.product_category_name_english
+    p.product_id,
+    p.product_category_name
 ORDER BY total_sold DESC
-LIMIT 10;
+LIMIT 10
