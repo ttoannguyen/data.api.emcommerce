@@ -1,5 +1,7 @@
 package com.toanng.dataemcommerceapi.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,19 +19,19 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@IdClass(GeolocationsPKId.class)
-public class Geolocations {
+@IdClass(GeolocationPKId.class)
+public class Geolocation {
     @Id
     @Column(name = "geolocation_zip_code_prefix")
     String geolocationZipCodePrefix;
 
     @Id
     @Column(name = "geolocation_lat")
-    String geolocationLat;
+    BigDecimal geolocationLat;
 
     @Id
     @Column(name = "geolocation_lng")
-    String geolocationLng;
+    BigDecimal geolocationLng;
 
     @Column(name = "geolocation_city")
     String geolocationCity;

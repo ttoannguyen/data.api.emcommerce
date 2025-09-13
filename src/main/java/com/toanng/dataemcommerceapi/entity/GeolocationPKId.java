@@ -1,6 +1,7 @@
 package com.toanng.dataemcommerceapi.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,8 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class GeolocationsPKId implements Serializable {
+public class GeolocationPKId implements Serializable {
     String geolocationZipCodePrefix;
-    String geolocationLat;
-    String geolocationLng;
+    BigDecimal geolocationLat;
+    BigDecimal geolocationLng;
 }
