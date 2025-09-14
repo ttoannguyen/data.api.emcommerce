@@ -32,5 +32,4 @@ public class CustomerEntity {
 
     @Column(name = "customer_state")
     String customerState;
-
 }

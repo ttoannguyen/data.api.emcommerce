@@ -12,9 +12,9 @@ import com.toanng.dataemcommerceapi.entity.Geolocation;
 public interface GeolocationsMapper {
     // Geolocations toGeolocations(GeolocationsRequest request);
 
-    @Mapping(source = "geolocationZipCodePrefix", target = "zipCode")
-    @Mapping(source = "geolocationLat", target = "lat")
-    @Mapping(source = "geolocationLng", target = "lng")
+    @Mapping(source = "id.geolocationZipCodePrefix", target = "zipCode")
+    @Mapping(source = "id.geolocationLat", target = "lat")
+    @Mapping(source = "id.geolocationLng", target = "lng")
     @Mapping(source = "geolocationCity", target = "city")
     @Mapping(source = "geolocationState", target = "state")
     GeolocationsResponse toGeolocationsResponse(Geolocation geolocations);

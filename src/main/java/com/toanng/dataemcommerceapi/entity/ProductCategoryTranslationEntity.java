@@ -16,7 +16,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProductCategoryTranslation {
+public class ProductCategoryTranslationEntity {
     @Id
     @Column(name = "product_category_name")
     String productCategoryName;

@@ -113,3 +113,51 @@ GROUP BY
     p.product_category_name
 ORDER BY total_sold DESC
 LIMIT 10
+
+SELECT p.product_id, p.product_category_name, SUM(oi.freight_value) AS total_freight, RANK() OVER (
+        ORDER BY COUNT(oi.order_item_id) DESC
+    ) AS rank
+FROM ecommerce.order_items oi
+    JOIN ecommerce.products p ON oi.product_id = p.product_id
+GROUP BY
+    p.product_id,
+    p.product_category_name
+LIMIT 10
+
+WITH
+    ranked_products AS (
+        SELECT p.product_id, p.product_category_name, SUM(oi.freight_value) AS total_freight, RANK() OVER (
+                ORDER BY COUNT(oi.order_item_id) DESC
+            ) AS rank, COUNT(oi.order_item_id) AS count
+        FROM ecommerce.order_items oi
+            JOIN ecommerce.products p ON oi.product_id = p.product_id
+        GROUP BY
+            p.product_id,
+            p.product_category_name
+    )
+SELECT *
+FROM ranked_products
+WHERE
+    rank <= 10;
+
+SELECT
+    DATE_TRUNC(
+        'month',
+        o.order_purchase_timestamp
+    ) AS month,
+    SUM(oi.price + oi.freight_value) AS revenue,
+    SUM(
+        SUM(oi.price + oi.freight_value)
+    ) OVER (
+        ORDER BY DATE_TRUNC(
+                'month', o.order_purchase_timestamp
+            )
+    ) AS cumulative_revenue
+FROM ecommerce.orders o
+    JOIN ecommerce.order_items oi ON o.order_id = oi.order_id
+GROUP BY
+    DATE_TRUNC(
+        'month',
+        o.order_purchase_timestamp
+    )
+ORDER BY month;
