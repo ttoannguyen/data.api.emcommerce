@@ -114,6 +114,9 @@ GROUP BY
 ORDER BY total_sold DESC
 LIMIT 10
 
+
+
+
 SELECT p.product_id, p.product_category_name, SUM(oi.freight_value) AS total_freight, RANK() OVER (
         ORDER BY COUNT(oi.order_item_id) DESC
     ) AS rank
